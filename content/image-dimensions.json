@@ -1,0 +1,110 @@
+{
+  "library-room": {
+    "width": 2400,
+    "height": 1600
+  },
+  "gym-hall": {
+    "width": 2400,
+    "height": 1600
+  },
+  "parlour": {
+    "width": 2400,
+    "height": 1600
+  },
+  "aerial-night": {
+    "width": 2400,
+    "height": 2244
+  },
+  "bar-front": {
+    "width": 2400,
+    "height": 1600
+  },
+  "entrance-sign": {
+    "width": 2400,
+    "height": 1600
+  },
+  "heavens-door-shelf": {
+    "width": 2400,
+    "height": 1600
+  },
+  "courtyard-dusk": {
+    "width": 2400,
+    "height": 1600
+  },
+  "crest": {
+    "width": 344,
+    "height": 450
+  },
+  "courtyard-firepit": {
+    "width": 2400,
+    "height": 1600
+  },
+  "exterior-day": {
+    "width": 2400,
+    "height": 1600
+  },
+  "chapel-ceiling": {
+    "width": 2400,
+    "height": 1599
+  },
+  "windows-closeup": {
+    "width": 1663,
+    "height": 2400
+  },
+  "patio-day": {
+    "width": 2400,
+    "height": 1629
+  },
+  "velvet-lounge": {
+    "width": 2400,
+    "height": 1920
+  },
+  "the-pour": {
+    "width": 1677,
+    "height": 2400
+  },
+  "lounge-window": {
+    "width": 1601,
+    "height": 2400
+  },
+  "gym-mezzanine": {
+    "width": 2400,
+    "height": 1587
+  },
+  "bourbon-wall": {
+    "width": 1602,
+    "height": 2400
+  },
+  "facade-night": {
+    "width": 1800,
+    "height": 2400
+  },
+  "arrival": {
+    "width": 1392,
+    "height": 2400
+  },
+  "stained-glass-cocktail": {
+    "width": 1601,
+    "height": 2400
+  },
+  "chapel-room": {
+    "width": 2400,
+    "height": 1851
+  },
+  "spire-dusk": {
+    "width": 1500,
+    "height": 1634
+  },
+  "courtyard-aerial": {
+    "width": 2400,
+    "height": 1602
+  },
+  "chapel-wide": {
+    "width": 2400,
+    "height": 1049
+  },
+  "logo": {
+    "width": 506,
+    "height": 600
+  }
+}
