@@ -56,7 +56,7 @@ export function Altar({ list }: { list: WhiskeyList }) {
           <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3" aria-label="Shelves">
             {shelves.map((s) => (
               <li key={s.id}>
-                <Link href={`/whiskey?shelf=${s.id}`} className="group inline-flex items-baseline gap-2 py-1">
+                <Link href={`/whiskey?shelf=${s.id}`} className="group inline-flex min-h-11 items-center gap-2">
                   <span className="border-b border-transparent transition-colors group-hover:border-amber group-hover:text-amber">{s.label}</span>
                   <span className="t-small text-vellum tabular">{counts[s.id]}</span>
                 </Link>

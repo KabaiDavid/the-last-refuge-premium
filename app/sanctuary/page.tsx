@@ -116,7 +116,7 @@ export default function SanctuaryPage() {
               <li key={g.photo.src} className={`${g.span}`} data-reveal>
                 <figure>
                   <div className={`relative overflow-hidden ${g.ratio}`}>
-                    <Photo photo={g.photo} sizes="(min-width:768px) 55vw, 100vw" className="transition-transform duration-[1.4s] ease-exhale hover:scale-[1.03]" />
+                    <Photo photo={g.photo} alt="" sizes="(min-width:768px) 55vw, 100vw" className="transition-transform duration-[1.4s] ease-exhale hover:scale-[1.03]" />
                   </div>
                   <figcaption className="mt-3 t-small text-vellum">{g.photo.alt}</figcaption>
                 </figure>

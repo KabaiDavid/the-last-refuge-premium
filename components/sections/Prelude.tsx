@@ -42,12 +42,9 @@ export function Prelude() {
           {site.tagline}
         </p>
         <h1 id="hero-title" className="t-hero max-w-[12ch]">
-          <span className="block overflow-hidden pb-[0.06em]">
-            <span className="block animate-[rise-line_1.4s_var(--ease-exhale)_.15s_both]">The Last</span>
-          </span>
-          <span className="block overflow-hidden pb-[0.08em]">
-            <span className="block animate-[rise-line_1.4s_var(--ease-exhale)_.3s_both] italic text-parchment/95">Refuge</span>
-          </span>
+          {/* Painted at first frame (it is the LCP); motion is transform-only so it never delays paint. */}
+          <span className="block animate-[settle-type_1.6s_var(--ease-exhale)_both]">The Last</span>
+          <span className="block animate-[settle-type_1.6s_var(--ease-exhale)_.12s_both] italic text-parchment/95">Refuge</span>
         </h1>
 
         <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-12 lg:items-end">

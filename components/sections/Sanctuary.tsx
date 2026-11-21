@@ -34,7 +34,7 @@ export function Sanctuary() {
                 <Photo photo={img["exterior-day"]} sizes="(min-width:1024px) 55vw, 100vw" position="50% 40%" />
               </div>
             </div>
-            <div className="relative -mt-24 ml-auto w-[48%] max-w-[22rem] sm:-mt-40 lg:-mr-10">
+            <div className="relative -mt-24 ml-auto w-[48%] max-w-[22rem] sm:-mt-40 lg:mr-6">
               <div className="lancet relative aspect-[3/4.4] overflow-hidden border-0" data-reveal="mask" data-reveal-delay="0.15">
                 <Photo photo={img["windows-closeup"]} sizes="(min-width:1024px) 22rem, 48vw" position="50% 25%" />
               </div>

@@ -3,32 +3,54 @@
 _Last updated: 2026-11-21_
 
 ## Completed
-- Phase 1 Research & audit → `docs/01-research-audit.md`
-- Phase 2–3 Creative direction, design system, IA → `docs/02-creative-direction.md`
-- Live whiskey sheet snapshot (6 tabs, ~940 rows) → `research/whiskey-sheet/`
-- Image inventory + contact sheet → `research/`
+- **Phases 1–3:** research, audit, creative direction ("An Order of Service"), design system, IA. See `docs/`.
+- **Phase 4, core build:** Next.js 16 / React 19 / Tailwind v4. Routes: `/`, `/reservations`, `/menus`, `/whiskey`, `/sanctuary`, `/private-events`, `/events`, `/visit`, a 404 page, plus the old-URL redirects.
+- **Phase 5, motion:** CSS hero entrance; GSAP reveals, parallax, hymn-board numerals and the pinned **Look up** Chapel scene (desktop only, loaded at idle); an IntersectionObserver/CSS reveal path for phones and tablets; Lenis smooth scroll on desktop with a fine pointer only. Reduced motion turns all of it off.
+- **Phase 6, responsive:** swept all 9 routes at 360/390/430/768/1024/1280/1440/1920/2560. No horizontal overflow. Art-directed hero (portrait façade on phones, courtyard on tablet and up). Sticky mobile action bar (Menu · Call · Reserve).
+- **Phase 7, SEO/perf:** per-route titles, descriptions, canonicals, OG/Twitter; JSON-LD `BarOrPub`+`Restaurant` (address, geo, hours, menu, reservations), `Menu`, and `Event` (from live calendar data only); sitemap, robots; local AVIF/WebP images; self-hosted fonts.
+- **Phase 8, QA:** see results below.
 
-## Current
-- Awaiting sign-off on the creative direction ("An Order of Service") before Phase 4 build.
+## QA results (local production build, 21 Nov 2026)
+Lighthouse mobile, default simulated throttling:
 
-## Remaining
-Phase 4 core build → 5 motion → 6 responsive → 7 SEO/perf → 8 QA → 9 polish.
+| Route | Perf | A11y | Best Pr. | SEO | LCP | TBT | CLS |
+|---|---|---|---|---|---|---|---|
+| / | 92 | 100 | 100 | 100 | 3.2 s | 110 ms | 0 |
+| /menus | 96 | 100 | 100 | 100 | 2.7 s | 60 ms | 0 |
+| /whiskey | 94 | 100 | 100 | 100 | 2.8 s | 130 ms | 0 |
+| /private-events | 92 | 100 | 100 | 100 | 3.3 s | 50 ms | 0.026 |
+| /reservations | 95 | 100 | 79* | 100 | 2.9 s | 70 ms | 0 |
+| /sanctuary | 90 | 99→100† | 100 | 100 | 3.4 s | 50 ms | 0.02 |
+| /events | 95 | 100 | 79* | 100 | 2.9 s | 50 ms | 0 |
+| /visit | 95 | 100 | 100 | 100 | 2.8 s | 50 ms | 0.001 |
+
+\* Third-party cookies set by the OpenTable / Surreal widgets. This is outside our control.
+† The redundant-alt issue in the gallery was fixed after this run.
+
+Notes on the numbers:
+- **The LCP target of ≤ 2.5 s is not yet met under simulated mobile throttling** (2.7–3.4 s). With DevTools throttling it measures 1.9–2.9 s. Measured on localhost with no CDN, so production on a CDN edge should improve TTFB. **Re-measure after deploy before claiming the target.**
+- With DevTools throttling, some routes show 700–800 ms TBT. That comes from the venue's GTM container loading its Facebook pixel, which only fires after interaction or 5 s idle.
+- Functional checks: all 29 internal links and anchors resolve; 14/16 external links return 200 (Instagram 429 and OpenTable 503 reject automated clients; both URLs are correct). The mobile menu has a focus trap, closes on Escape, and returns focus to its toggle. The skip link works. The allergen filter, whiskey search/shelf/sort, the `?q=` and `?shelf=` deep links, and the homepage search → `/whiskey` all work. No-JS renders all content, including all 945 whiskeys. Reduced motion disables Lenis, the pin and reveals. No console errors from our code.
+
+## Remaining / next
+1. Deploy a preview (Netlify or Cloudflare Pages) and re-run Lighthouse and WebPageTest on the real CDN.
+2. Verify the OpenTable widget renders in a real browser. Headless Chrome is bot-blocked by OpenTable, and the direct "Book on OpenTable" link is always shown as a fallback.
+3. Client inputs below, then content refinements.
 
 ## Technical decisions
-- Next.js App Router + TS + Tailwind v4; GSAP/ScrollTrigger + Lenis (desktop only); no Framer Motion; no WebGL in v1.
-- Keep the providers: OpenTable (rid 1335805), Tripleseat (form 5699), Surreal (events), Google Sheet (whiskey list, ISR 15 min + snapshot fallback).
-- Fonts: Libre Caslon Display/Text + Instrument Sans, self-hosted.
-- Founding year shown as 1880 (venue's own claim; press says 1879).
+- No WebGL in v1 (see `docs/02-creative-direction.md` §6). No Framer Motion. GSAP is desktop-only and dynamically imported.
+- The whiskey list stays in the bar team's Google Sheet: ISR 15 min, with the snapshot fallback in `content/whiskey-snapshot.json`.
+- The live count "945 whiskeys on the list tonight" is computed from the sheet and never hard-coded.
+- Founding year is shown as 1880 (the venue's claim; press says 1879).
+- GTM is deferred to first interaction or idle.
 
-## Known issues / risks
-- No video assets exist. The hero uses stills until footage is supplied.
-- No food photography. The food menu is typographic by design.
-- Room capacities are unverified and show "Ask us".
-- Hours conflict between the site (Wed–Sun) and OpenTable (Thu–Sat). The site version is used.
-- The newsletter needs a provider (Squarespace form is retired).
+## Known issues
+- No video assets exist, so the hero uses stills.
+- No food photography exists, so the menu is typographic by design.
+- Room capacities are unverified and shown as "Ask the events team".
+- Hours conflict: site (Wed–Sun) vs OpenTable (Thu–Sat). The site version is used. **Confirm with the client.**
+- No newsletter signup: the Squarespace form can't be carried over. A provider is needed.
+- The Surreal widget iframe logs its own React hydration error (inside their iframe).
 
 ## Asset requirements (from client)
-High-res originals of the 2025 shoot · vector logo/crest · any b-roll · capacities · newsletter provider.
-
-## Performance concerns
-HDR photography is large. Re-encode to AVIF with a ≤ 180KB LCP target. Lazy-load GSAP. Load the Tripleseat and OpenTable scripts only on their own routes.
+High-res originals of the 2025 shoot · vector logo/crest · any b-roll (would enable a video hero) · room capacities/amenities · newsletter provider · confirmation of hours.

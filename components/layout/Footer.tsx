@@ -18,37 +18,37 @@ export function Footer() {
               {site.address.city}, {site.address.region} {site.address.postalCode}
               <span className="sr-only"> (opens map in a new tab)</span>
             </a>
-            <a href={site.phone.href} className="block pt-3 hover:text-amber">{site.phone.display}</a>
-            <a href={`mailto:${site.email}`} className="block hover:text-amber">{site.email}</a>
+            <a href={site.phone.href} className="mt-3 block py-1.5 hover:text-amber">{site.phone.display}</a>
+            <a href={`mailto:${site.email}`} className="block py-1.5 hover:text-amber">{site.email}</a>
           </address>
         </div>
 
         <nav aria-label="Footer" className="grid grid-cols-2 gap-8 lg:col-span-4">
           <div>
             <p className="t-label text-brass">Visit</p>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-1">
               {[{ href: "/reservations", label: "Reservations" }, ...nav].map((n) => (
                 <li key={n.href}>
-                  <Link href={n.href} className="hover:text-amber">{n.label}</Link>
+                  <Link href={n.href} className="inline-block py-1.5 hover:text-amber">{n.label}</Link>
                 </li>
               ))}
             </ul>
           </div>
           <div>
             <p className="t-label text-brass">Elsewhere</p>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-1">
               <li>
-                <a href={site.links.instagram} target="_blank" rel="noopener" className="hover:text-amber">
+                <a href={site.links.instagram} target="_blank" rel="noopener" className="inline-block py-1.5 hover:text-amber">
                   Instagram<span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </li>
               <li>
-                <a href={site.links.giftCards} target="_blank" rel="noopener" className="hover:text-amber">
+                <a href={site.links.giftCards} target="_blank" rel="noopener" className="inline-block py-1.5 hover:text-amber">
                   Gift cards<span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </li>
               <li>
-                <a href={site.links.careers} target="_blank" rel="noopener" className="hover:text-amber">
+                <a href={site.links.careers} target="_blank" rel="noopener" className="inline-block py-1.5 hover:text-amber">
                   Join our team<span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </li>
@@ -78,7 +78,7 @@ export function Footer() {
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <span className="t-label text-[0.65rem] text-brass">Our concepts</span>
             {concepts.map((c) => (
-              <a key={c.name} href={c.url} target="_blank" rel="noopener" className="hover:text-parchment">
+              <a key={c.name} href={c.url} target="_blank" rel="noopener" className="inline-block py-1.5 hover:text-parchment">
                 {c.name}<span className="sr-only"> (opens in a new tab)</span>
               </a>
             ))}

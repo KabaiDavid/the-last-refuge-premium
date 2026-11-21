@@ -37,6 +37,11 @@
   --max: 90rem;
   color-scheme: dark;
 }
+@media (min-width: 1920px) {
+  :root {
+    --max: 112rem;
+  }
+}
 
 /* ───────────────────────── Base ───────────────────────── */
 @layer base {
@@ -87,7 +92,7 @@
 /* ───────────────────────── Type scale ───────────────────────── */
 @utility t-hero {
   font-family: var(--font-display);
-  font-size: clamp(3.9rem, 1.6rem + 9vw, 10.5rem);
+  font-size: clamp(3.9rem, 1.6rem + 9vw, 13rem);
   line-height: 0.9;
   letter-spacing: -0.025em;
 }
@@ -146,7 +151,7 @@
 
 /* A soft spill of stained-glass light. Colour set via --glass. */
 @utility glass-spill {
-  background:
+  background-image:
     radial-gradient(60% 50% at var(--spill-x, 20%) var(--spill-y, 0%), color-mix(in oklab, var(--glass, var(--color-ruby)) 22%, transparent), transparent 70%),
     radial-gradient(40% 40% at calc(100% - var(--spill-x, 20%)) 100%, color-mix(in oklab, var(--glass-2, var(--color-amber)) 10%, transparent), transparent 70%);
 }
@@ -212,6 +217,18 @@ html.motion-ok [data-reveal="fade"] {
   transform: none;
 }
 
+html.motion-lite [data-reveal] {
+  transition:
+    opacity 1s var(--ease-exhale),
+    transform 1s var(--ease-exhale),
+    clip-path 1.2s var(--ease-exhale);
+}
+html.motion-lite [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+
 @keyframes hero-settle {
   from {
     transform: scale(1.09);
@@ -235,6 +252,15 @@ html.motion-ok [data-reveal="fade"] {
 @keyframes rise-line {
   from {
     transform: translate3d(0, 105%, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes settle-type {
+  from {
+    transform: translate3d(0, 0.18em, 0);
+    letter-spacing: 0.01em;
   }
   to {
     transform: none;

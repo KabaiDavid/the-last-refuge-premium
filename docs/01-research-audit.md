@@ -52,7 +52,7 @@ Researched 21 Nov 2026 from the live site (thelastrefuge.com, Squarespace), its 
 - **Wine:** 3 reds, 4 white/rosé, 1 sparkling (glass/bottle). **Beer:** 7 draft + 7 packaged, with ABV.
 - **Exclusive bottles:** Woodford Reserve Baccarat Edition.
 - **Whiskey list:** ~940 rows across 6 tabs, with proof and 1oz/2oz pricing. It is maintained live by staff in the Google Sheet, so it is the single most valuable dataset on the site.
-- **Menu voice:** reverent-irreverent and funny. *Meat Jesus, Judas Loved Chocolate, The Devil's Eggs, Sin + Grits, Friar's Bacon, Parishioner's Popcorn, Holy Fire Dip, Madonna's Crazy Cousin, Purgatory 2.0.* Cocktail names are Dylan songs (*So Long, Honey Babe; Peach Tree; Crossroads*). **This wit is core brand equity, so the design must leave room for it and not sand it into generic luxury.**
+- **Menu voice:** reverent-irreverent and funny. *Meat Jesus, Judas Loved Chocolate, The Devil's Eggs, Sin + Grits, Friar's Bacon, Parishioner's Popcorn, Holy Fire Dip, Madonna's Crazy Cousin, Purgatory 2.0.* Several cocktails are built on Heaven's Door. (An early draft claimed the cocktail names were Dylan songs; that is unverified and has been dropped.) **This wit is core brand equity, so the design must leave room for it and not sand it into generic luxury.**
 - Live calendar items: *Gospel of Grain* (17 Sep 2026, bourbon event) and a New Year's Eve event.
 
 ### Photography (genuine, professional, 2025 shoot, ~25 usable)

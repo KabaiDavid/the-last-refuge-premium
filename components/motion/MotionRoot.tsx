@@ -23,13 +23,44 @@ export function MotionRoot() {
 
     let cancelled = false;
     let cleanup = () => {};
+    const html = document.documentElement;
+
+    // Phones & tablets: a few-hundred-byte path. IntersectionObserver + CSS
+    // transitions, no scroll-linked work, no layout reads on the main thread.
+    if (!window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches) {
+      const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+      const vh = window.innerHeight;
+      const io = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            const el = e.target as HTMLElement;
+            el.style.transitionDelay = `${Math.min(Number(el.dataset.revealDelay ?? 0), 0.3)}s`;
+            el.classList.add("is-in");
+            io.unobserve(el);
+          }),
+        { rootMargin: "0px 0px -8% 0px" },
+      );
+      els.forEach((el) => {
+        if (el.getBoundingClientRect().top < vh) el.classList.add("is-in");
+        else io.observe(el);
+      });
+      html.classList.add("motion-ok", "motion-lite");
+      return () => {
+        io.disconnect();
+        html.classList.remove("motion-ok", "motion-lite");
+        els.forEach((el) => el.classList.remove("is-in"));
+      };
+    }
 
     (async () => {
+      // Desktop: wait for the browser to be idle before bringing in GSAP.
+      await new Promise<void>((r) => ("requestIdleCallback" in window ? window.requestIdleCallback(() => r(), { timeout: 1500 }) : setTimeout(r, 200)));
+      if (cancelled) return;
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
       if (cancelled) return;
       gsap.registerPlugin(ScrollTrigger);
 
-      const html = document.documentElement;
       let lenis: { raf: (t: number) => void; destroy: () => void; on: (e: string, f: () => void) => void } | undefined;
       let tick: ((t: number) => void) | undefined;
       const finePointer = window.matchMedia("(pointer: fine) and (min-width: 1024px)").matches;

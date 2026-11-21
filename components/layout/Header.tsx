@@ -150,6 +150,7 @@ export function Header() {
                 <Link
                   href={item.href}
                   aria-current={pathname === item.href ? "page" : undefined}
+                  onClick={() => setOpen(false)}
                   className="flex items-baseline gap-5 py-4 font-display text-[2rem] leading-tight aria-[current=page]:text-amber"
                 >
                   <span className="w-8 font-sans text-xs tracking-[0.2em] text-brass tabular" aria-hidden>

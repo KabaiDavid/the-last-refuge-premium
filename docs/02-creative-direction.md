@@ -17,7 +17,7 @@ Three signature devices, all drawn from real objects in a real church:
 2. **Stained-glass light.** No glassmorphism. Colour on the site comes *from the photographs*: each section takes an accent sampled from its own stained glass (ruby, cobalt, amber, verdigris) as a soft light spill on the charcoal ground, as if light is falling through a window onto stone. Most of the UI stays monochrome (charcoal, parchment, brass), so the colour lands.
 3. **The Look Up.** The Chapel Room's painted ceiling is the most remarkable thing in the building. On scroll, the viewport "tilts its head back": the photo pans from the floor and lancet windows up into the painted sky, while the line *"Look up."* holds still. It is one cinematic moment and is reserved for this place only.
 
-Supporting motifs, used sparingly: the **lancet arch** as an image mask (hero frame and space cards; this is the building's own window shape), the **TLR crest** as a watermark or seal, and **Dylan as scripture**. Real lyrics are already used by the venue, and cocktail names are Dylan songs, so we set them as "readings". No more than one quotation per page, and each is attributed.
+Supporting motifs, used sparingly: the **lancet arch** as an image mask (hero frame and space cards; this is the building's own window shape), the **TLR crest** as a watermark or seal, and **Dylan as scripture**. Real lyrics are already used by the venue, so the homepage epigraph is set as a reading, and signature cocktails are presented as "readings" in the same typographic style. No more than one quotation per page, and each is attributed.
 
 ### What we will *not* do
 - No 3D bottle. There is no official model, a fake bottle would misrepresent product, and it adds weight for nothing. *(See §6 for the one place WebGL is justified, and why it is deferred.)*
@@ -37,7 +37,7 @@ The structure follows the order of service. Each section carries its hymn-board 
 | 02 | **Invocation** | The Dylan epigraph, set large. One paragraph: a church built in 1880 for a German-speaking congregation, then a gym where someone painted "refuge in Kentucky" on the floor, and now the home of Heaven's Door. | Crest | — |
 | 03 | **The Sanctuary** | Architecture story: brick, lancet windows, the gym, the courtyard, in layered image reveals → **The Look Up** (Chapel ceiling). | #11, #13, #02, #23/#27, #12 | → Private Events |
 | 04 | **The Altar** | The back bar. A live count, "**{n} whiskeys on the list tonight**", is computed from the staff-maintained sheet. Heaven's Door bottles are spotlit, and a search field lets you search the back bar. | #07, #19, #01 | → /whiskey |
-| 05 | **Communion** | Food and cocktails with the venue's names given room. Three signature cocktails as "readings" (name = Dylan song). | #22, #16, #05 | → /menus |
+| 05 | **Communion** | Food and cocktails with the venue's names given room. Three signature cocktails as "readings". | #22, #16, #05 | → /menus |
 | 06 | **Hymns** | Live music and Vinyl Revival nights. The next three events are pulled from Surreal. | #10 courtyard night | → /events |
 | 07 | **Fellowship** | Private events: the Chapel Room, the Gym, the lounges and the courtyard. | #27, #18, #15, #14 | Enquire |
 | 08 | **Directions** | Map, hours on the hymn board, 21+ notice, phone and email. | #04 drone pano | Directions · Call |

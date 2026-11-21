@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, Libre_Caslon_Display, Libre_Caslon_Text } from "next/font/google";
-import Script from "next/script";
+import { Analytics } from "@/components/embeds/Analytics";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MotionRoot } from "@/components/motion/MotionRoot";
@@ -65,9 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <MotionRoot />
         <JsonLd data={venueJsonLd()} />
-        <Script id="gtm" strategy="lazyOnload">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${site.analytics.gtm}');`}
-        </Script>
+        <Analytics id={site.analytics.gtm} />
       </body>
     </html>
   );

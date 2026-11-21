@@ -35,7 +35,7 @@ export function PageHero({
           <span aria-hidden className="h-px w-8 bg-brass/50" />
           <span className="t-label text-brass">{label}</span>
         </p>
-        <h1 className="t-display mt-8 max-w-[16ch] animate-[rise_1.2s_var(--ease-exhale)_.3s_both]">{title}</h1>
+        <h1 className="t-display mt-8 max-w-[16ch] animate-[settle-type_1.4s_var(--ease-exhale)_both]">{title}</h1>
         {lede && <div className="t-lede mt-6 max-w-[46ch] text-parchment/85 animate-[rise_1.2s_var(--ease-exhale)_.45s_both]">{lede}</div>}
         {children && <div className="mt-10 flex flex-wrap gap-4 animate-[rise_1.2s_var(--ease-exhale)_.6s_both]">{children}</div>}
       </div>

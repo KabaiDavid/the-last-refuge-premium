@@ -13,7 +13,7 @@ export function LookUp({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const el = root.current;
     if (!el) return;
-    const mq = window.matchMedia("(prefers-reduced-motion: no-preference) and (min-width: 768px)");
+    const mq = window.matchMedia("(prefers-reduced-motion: no-preference) and (min-width: 1024px) and (pointer: fine)");
     if (!mq.matches) return;
     let revert = () => {};
     let cancelled = false;
@@ -32,7 +32,7 @@ export function LookUp({ children }: { children: React.ReactNode }) {
           scrollTrigger: { trigger: el, start: "top top", end: "+=180%", scrub: 0.6, pin: true, anticipatePin: 1 },
         });
         // 1. The room, framed from the floor; the camera tilts upward.
-        tl.fromTo(room, { objectPosition: "50% 100%", scale: 1.15 }, { objectPosition: "50% 0%", scale: 1.0, duration: 1 })
+        tl.fromTo(room, { objectPosition: "50% 100%", scale: 1.3, transformOrigin: "50% 100%" }, { objectPosition: "50% 0%", scale: 1.0, duration: 1 })
           .fromTo(words, { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: 0.08, duration: 0.35 }, 0.15)
           // 2. Into the painted sky.
           .fromTo(sky, { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1.02, duration: 0.8 }, 0.75)
