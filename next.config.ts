@@ -1,27 +1,21 @@
 import type { NextConfig } from "next";
 
+/**
+ * Static export for Cloudflare Pages: `npm run build` writes the complete
+ * site to `out/`.
+ * - Images: pre-rendered at build (scripts/optimize-images.mjs) and served
+ *   through a custom loader, because the runtime optimizer needs a server.
+ * - Redirects and cache headers live in public/_redirects and public/_headers,
+ *   which Cloudflare Pages applies natively.
+ */
 const nextConfig: NextConfig = {
+  output: "export",
   images: {
-    formats: ["image/avif", "image/webp"],
+    loader: "custom",
+    loaderFile: "./lib/image-loader.ts",
+    // Keep in sync with WIDTHS in scripts/optimize-images.mjs.
     deviceSizes: [390, 640, 828, 1080, 1440, 1920, 2400],
-    qualities: [70, 80],
-  },
-  async redirects() {
-    // Preserve the old Squarespace URLs.
-    return [
-      { source: "/whiskey-list", destination: "/whiskey", permanent: true },
-      { source: "/photos", destination: "/sanctuary", permanent: true },
-      { source: "/contact", destination: "/visit", permanent: true },
-      { source: "/gift-cards", destination: "https://swipeit.com/co-branded/merchant/the-last-refuge-11350", permanent: false },
-    ];
-  },
-  async headers() {
-    return [
-      {
-        source: "/images/:path*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-      },
-    ];
+    imageSizes: [256, 384],
   },
 };
 

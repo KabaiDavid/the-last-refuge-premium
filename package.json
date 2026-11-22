@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx serve out",
     "lint": "tsc --noEmit",
-    "assets": "node scripts/fetch-assets.mjs"
+    "assets": "node scripts/fetch-assets.mjs",
+    "prebuild": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.1",

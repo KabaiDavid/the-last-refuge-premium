@@ -13,14 +13,13 @@ const decode = (s: string) =>
     .trim();
 
 /**
- * Reads upcoming events from the venue's Surreal widget (the same source as
- * the embedded calendar on /events). Returns [] on any failure, so callers
+ * Reads upcoming events from the venue's Surreal widget at build time (the
+ * embedded calendar on /events stays live in the browser). Returns [] on any failure, so callers
  * show the embedded calendar instead of invented content.
  */
 export async function getUpcomingEvents(limit = 6): Promise<LiveEvent[]> {
   try {
     const res = await fetch(site.links.eventsWidget, {
-      next: { revalidate: 3600 },
       signal: AbortSignal.timeout(6000),
     });
     if (!res.ok) return [];

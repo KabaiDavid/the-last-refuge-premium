@@ -5,8 +5,6 @@ import { img } from "@/content/images";
 import { pageMetadata } from "@/lib/seo";
 import { getWhiskeyList, shelves } from "@/lib/whiskey";
 
-export const revalidate = 900;
-
 export const metadata = pageMetadata({
   title: "The Back Bar: Whiskey & Bourbon List",
   description:

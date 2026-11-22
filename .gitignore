@@ -160,3 +160,7 @@ vite.config.ts.timestamp-*
 .next/
 next-env.d.ts
 *.tsbuildinfo
+
+# Static export output and build-time image variants
+/out/
+/public/_img/

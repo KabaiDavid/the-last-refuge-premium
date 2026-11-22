@@ -10,8 +10,6 @@ import { Sanctuary } from "@/components/sections/Sanctuary";
 import { getUpcomingEvents } from "@/lib/events";
 import { getWhiskeyList } from "@/lib/whiskey";
 
-export const revalidate = 900;
-
 /** The homepage is an order of service: nine parts, one evening. */
 export default async function Home() {
   const [list, events] = await Promise.all([getWhiskeyList(), getUpcomingEvents(4)]);

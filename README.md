@@ -10,10 +10,13 @@ A High Church of Bourbon at 600 East Market Street, Louisville. This is the webs
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm run build && npm start
+npm run build      # static export → out/ (deployed by Cloudflare Pages)
+npm start          # serves out/ locally
 ```
 
-Node 20+ is required.
+Node 22 (see `.node-version`). **Deploys:** pushing to `claude/jolly-galileo-sjje1f` triggers Cloudflare Pages, which runs `npm run build` and publishes `out/`.
+
+`npm run build` first runs `prebuild`, which generates responsive WebP variants of every photo into `public/_img/` (git-ignored). Static export has no runtime image optimizer, so `lib/image-loader.ts` points `next/image` at these files.
 
 ## Where things live
 
@@ -23,13 +26,13 @@ Node 20+ is required.
 | Food, cocktails, wine, beer (names, prices, allergens) | `content/menu.ts` |
 | Event spaces | `content/spaces.ts` |
 | Photography and alt text | `public/images/` + `content/images.ts` |
-| Whiskey list | **The bar team's Google Sheet** (unchanged). `lib/whiskey.ts` fetches it every 15 min |
-| Live events | The venue's Surreal calendar, read by `lib/events.ts` hourly |
+| Whiskey list | **The bar team's Google Sheet** (unchanged). Read at build time into the HTML, then re-read in the browser on `/whiskey` |
+| Live events | The venue's Surreal calendar: build-time list via `lib/events.ts`, plus the live embedded calendar on `/events` |
 | Homepage sections (one file each) | `components/sections/` |
 | Motion (GSAP desktop / IntersectionObserver mobile) | `components/motion/` |
 
 ### Updating content
-- **Whiskey:** edit the Google Sheet exactly as today. Changes appear within 15 minutes. If the sheet becomes unreachable, the site falls back to `content/whiskey-snapshot.json`. Refresh the snapshot with `node scripts/snapshot-whiskey.mjs`.
+- **Whiskey:** edit the Google Sheet exactly as today. The `/whiskey` list picks up changes on the next page load. The homepage count updates on the next deploy. If the sheet becomes unreachable, the site falls back to `content/whiskey-snapshot.json`. Refresh the snapshot with `node scripts/snapshot-whiskey.mjs`.
 - **Hours / menu:** edit `content/site.ts` or `content/menu.ts`. The hours board, the "open now" status and the structured data all update from these files.
 - **Photos:** `npm run assets` re-downloads the venue photography from the current Squarespace CDN. To swap in high-res originals, replace the files in `public/images/` (same names) and update `content/image-dimensions.json`.
 
@@ -38,4 +41,4 @@ Node 20+ is required.
 - **Private events:** the Tripleseat lead form (id `5699`) on `/private-events#enquire`.
 - **Events:** the Surreal widget on `/events`.
 - **Analytics:** GTM `GTM-NZFTH7PC`. It is deferred until the first interaction or 5 seconds of idle time.
-- Old URLs redirect: `/whiskey-list → /whiskey`, `/photos → /sanctuary`, `/contact → /visit`, `/gift-cards →` swipeit.
+- Old URLs redirect (`public/_redirects`): `/whiskey-list → /whiskey`, `/photos → /sanctuary`, `/contact → /visit`, `/gift-cards →` swipeit. Cache headers are in `public/_headers`.

@@ -1,0 +1,5 @@
+# Old Squarespace URLs → new pages (Cloudflare Pages redirects)
+/whiskey-list  /whiskey    301
+/photos        /sanctuary  301
+/contact       /visit      301
+/gift-cards    https://swipeit.com/co-branded/merchant/the-last-refuge-11350  302

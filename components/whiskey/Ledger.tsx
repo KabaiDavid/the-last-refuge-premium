@@ -1,7 +1,7 @@
 "use client";
 
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
-import type { ShelfId, Whiskey } from "@/lib/whiskey";
+import { parseShelf, sheetCsvUrl, shelves as sheetShelves, type ShelfId, type Whiskey } from "@/lib/whiskey-core";
 
 type Shelf = { id: ShelfId; label: string };
 type Sort = "name" | "proof-desc" | "price-asc" | "price-desc";
@@ -15,7 +15,36 @@ const norm = (s: string) =>
     .replace(/[’']/g, "'");
 
 /** The back bar as a ledger: search, shelves, sort. Server-rendered in full, so every bottle is indexable. */
-export function Ledger({ items, shelves }: { items: Whiskey[]; shelves: Shelf[] }) {
+export function Ledger({ items: initialItems, shelves }: { items: Whiskey[]; shelves: Shelf[] }) {
+  // Built into the static HTML at deploy time, then refreshed from the bar
+  // team's sheet in the browser so the list stays current between deploys.
+  const [items, setItems] = useState(initialItems);
+  useEffect(() => {
+    let cancelled = false;
+    const refresh = async () => {
+      try {
+        const tabs = await Promise.all(
+          sheetShelves.map(async (s) => {
+            const res = await fetch(sheetCsvUrl(s.gid));
+            if (!res.ok) throw new Error(String(res.status));
+            const text = await res.text();
+            if (text.trimStart().startsWith("<")) throw new Error("not CSV");
+            return parseShelf(s.id, s.layout, text);
+          }),
+        );
+        const fresh = tabs.flat();
+        if (!cancelled && fresh.length >= 50) setItems(fresh);
+      } catch {
+        // Keep the build-time list.
+      }
+    };
+    // Run after the page has settled; Safari has no requestIdleCallback.
+    const timer = globalThis.setTimeout(refresh, 1500);
+    return () => {
+      cancelled = true;
+      globalThis.clearTimeout(timer);
+    };
+  }, []);
   const [q, setQ] = useState("");
   const [shelf, setShelf] = useState<ShelfId | "all">("all");
   const [ready, setReady] = useState(false);

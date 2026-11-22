@@ -37,9 +37,13 @@ Notes on the numbers:
 2. Verify the OpenTable widget renders in a real browser. Headless Chrome is bot-blocked by OpenTable, and the direct "Book on OpenTable" link is always shown as a fallback.
 3. Client inputs below, then content refinements.
 
+## Deployment
+- **Cloudflare Pages, static export.** `next.config.ts` uses `output: "export"`, and `npm run build` writes the full site to `out/`. Pushes to `claude/jolly-galileo-sjje1f` auto-deploy.
+- Replacements for server-only features: build-time WebP variants with a custom `next/image` loader; `public/_redirects` and `public/_headers`; whiskey data built in and refreshed client-side; homepage event list and whiskey count frozen at build time (they refresh on each deploy).
+
 ## Technical decisions
 - No WebGL in v1 (see `docs/02-creative-direction.md` §6). No Framer Motion. GSAP is desktop-only and dynamically imported.
-- The whiskey list stays in the bar team's Google Sheet: ISR 15 min, with the snapshot fallback in `content/whiskey-snapshot.json`.
+- The whiskey list stays in the bar team's Google Sheet. It is read at build time (with the snapshot fallback in `content/whiskey-snapshot.json`) and re-read in the browser on `/whiskey`.
 - The live count "945 whiskeys on the list tonight" is computed from the sheet and never hard-coded.
 - Founding year is shown as 1880 (the venue's claim; press says 1879).
 - GTM is deferred to first interaction or idle.

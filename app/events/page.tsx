@@ -7,8 +7,6 @@ import { site } from "@/content/site";
 import { getUpcomingEvents } from "@/lib/events";
 import { pageMetadata } from "@/lib/seo";
 
-export const revalidate = 3600;
-
 /** UTC offset in Louisville on a given date, e.g. "-05:00". */
 function louisvilleOffset(date: string) {
   const name = new Intl.DateTimeFormat("en-US", { timeZone: "America/Kentucky/Louisville", timeZoneName: "longOffset" })
